@@ -1,0 +1,233 @@
+<style>
+  /* Estilos para la barra de navegación */
+  .navbar {
+    display: flex;
+    align-items: center; /* Centra contenido verticalmente */
+    width: 100%;
+    height: 5rem;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 140, 0.8) 10%,
+      rgba(128, 128, 128, 0.9) 70%
+    );
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
+    justify-content: space-between; /* Asegura el espacio entre los elementos */
+    padding: 0 1rem; /* Agrega padding para que no toque los bordes */
+    box-sizing: border-box; /* Para que el padding no cause desbordes */
+  }
+
+  ul.list_item .item a {
+    text-decoration: none; /* Quitar el subrayado */
+    color: inherit; /* Heredar color del padre o cambiar a un color específico */
+  }
+
+  .list_item {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .item {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .item:hover {
+    color: #dcdcdc;
+  }
+
+  /* Estilos para la búsqueda */
+  .search-term {
+    display: flex; /* Flexbox para alinear input y botón en fila */
+    align-items: center; /* Alinea el input y el botón verticalmente */
+    justify-content: center; /* Centra la barra de búsqueda */
+  }
+
+  .search-term input {
+    height: 2.5rem;
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+    flex-grow: 1; /* El input ocupa todo el espacio disponible */
+    max-width: 50rem; /* Limita el ancho máximo */
+  }
+
+  .search-term button {
+    background-color: #00008b;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-left: 1rem; /* Separa el botón del input */
+    border-radius: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    height: 2.5rem; /* Mantiene la altura del botón igual al input */
+  }
+
+  /* Hover en el botón */
+  .search-term button:hover {
+    background-color: #555;
+  }
+
+  /* Media Queries */
+  /* Para pantallas grandes */
+  @media (max-width: 1200px) {
+    .navbar {
+      justify-content: space-between;
+    }
+
+    .list_item {
+      gap: 1.5rem;
+    }
+
+    .search-term {
+      justify-content: center;
+    }
+
+    .search-term input {
+      max-width: 20rem;
+    }
+
+    .search-term button {
+      font-size: 1.1rem;
+    }
+
+    .item {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Para tablets */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      height: auto;
+      padding: 1rem;
+    }
+
+    .list_item {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .search-term {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .search-term input {
+      width: 100%;
+      font-size: 1rem;
+      margin-bottom: 1rem; /* Añade espacio entre el input y el botón */
+    }
+
+    .search-term button {
+      width: 100%;
+      font-size: 1rem;
+      margin-left: 0;
+    }
+  }
+
+  /* Para dispositivos con pantallas pequeñas */
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 0.5rem;
+      justify-content: center;
+    }
+
+    .item {
+      font-size: 0.9rem;
+    }
+
+    .search-term input {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .search-term button {
+      width: 100%;
+      font-size: 0.9rem;
+      margin-left: 0;
+      margin-top: 1rem; /* Añade espacio en pantallas pequeñas */
+    }
+  }
+
+  /* Para pantallas muy pequeñas */
+  @media (max-width: 320px) {
+    .navbar {
+      flex-direction: column;
+      justify-content: center; /* Centra los elementos en la barra de navegación */
+      align-items: center; /* Alinea los elementos en el centro */
+      padding: 0 1rem; /* Añade un pequeño espacio lateral */
+    }
+
+    .list_item {
+      flex-direction: column;
+      gap: 1rem; /* Ajusta el espacio entre los elementos en pantallas muy pequeñas */
+      align-items: center; /* Centra los elementos de la lista */
+      padding: 0;
+      margin: 0;
+    }
+
+    .item {
+      font-size: 0.9rem; /* Reduce el tamaño de fuente en pantallas pequeñas */
+      text-align: center; /* Asegura que el texto esté centrado */
+    }
+
+    .search-term {
+      width: 80%; /* Ajusta el tamaño del input */
+      max-width: 18rem; /* Limita el tamaño máximo del input */
+      margin-top: 1rem; /* Añade un pequeño margen superior */
+    }
+
+    .search-term input {
+      width: 80%; /* Asegura que el input ocupe el 100% del contenedor */
+      height: 2.5rem; /* Ajusta la altura del input */
+      font-size: 0.9rem; /* Reduce el tamaño de fuente del input */
+    }
+
+    .search-term button {
+      width: 80%; /* Ajusta el tamaño del botón en pantallas pequeñas */
+      font-size: 0.9rem;
+      margin-top: 1rem; /* Asegura que haya espacio entre el input y el botón */
+    }
+  }
+</style>
+
+<nav class="navbar">
+  <ul class="list_item">
+    <li class="item"><a href="{% url 'homeMovies' %}">Home</a></li>
+    <!-- Redirige a la vista 'homeMovies' -->
+    <li class="item"><a href="#">Categoría</a></li>
+    <!-- Agrega enlaces para otras páginas -->
+    <li class="item"><a href="#">Año</a></li>
+  </ul>
+
+  <div class="search-term">
+    <form method="GET" action="{% url 'homeMovies' %}">
+      <input
+        type="text"
+        placeholder="Buscar por título"
+        name="search-text"
+        id="search-text"
+        value="{{ search_term|default:'' }}"
+      />
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+  <div class="item">Profile</div>
+</nav>
