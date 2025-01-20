@@ -22,6 +22,11 @@
     text-decoration: none; /* Quitar el subrayado */
     color: inherit; /* Heredar color del padre o cambiar a un color específico */
   }
+  
+  a{
+    text-decoration: none;
+    color: black;
+  }
 
   .list_item {
     list-style: none;
@@ -210,11 +215,11 @@
 
 <nav class="navbar">
   <ul class="list_item">
-    <li class="item"><a href="{% url 'homeMovies' %}">Home</a></li>
+    <li class="item"><a href="{% url 'homeMovies' %}">home</a></li>
     <!-- Redirige a la vista 'homeMovies' -->
-    <li class="item"><a href="#">Categoría</a></li>
+    <li class="item"><a href="#">categoría</a></li>
     <!-- Agrega enlaces para otras páginas -->
-    <li class="item"><a href="#">Año</a></li>
+    <li class="item"><a href="#">año</a></li>
   </ul>
 
   <div class="search-term">
@@ -229,5 +234,5 @@
       <button type="submit">Buscar</button>
     </form>
   </div>
-  <div class="item">Profile</div>
+  <div class="item"><a href="{% url 'configMovies' %}">config</a></div>
 </nav>
