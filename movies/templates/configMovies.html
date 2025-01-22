@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de Películas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Estilo general */
         body {
@@ -10,7 +18,7 @@
         }
 
         #main {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -36,7 +44,8 @@
             background-color: #444;
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #555;
@@ -61,68 +70,127 @@
             color: #e6e6e6;
         }
 
-        /* Estilo de la paginación */
-        .pagination {
-            margin-top: 20px;
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #333;
+            color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 50%;
             text-align: center;
         }
 
-        .pagination a {
-            color: #ffcc00;
-            text-decoration: none;
-            margin: 0 10px;
-            padding: 8px 12px;
-            background-color: #333;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+       
+    </style>
+</head>
 
-        .pagination a:hover {
-            background-color: #ffcc00;
-            color: #333;
-        }
+<body>
+    <div id="main">
+        <p><a href="{% url 'homeMovies' %}"><strong>Home</strong></a> / Configuración</p>
+        <section id="table">
+            <h4>Registros de películas</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>título</th>
+                        <th>descripción</th>
+                        <th>rating</th>
+                        <th>acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in page_obj %}
+                    <tr>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.description }}</td>
+                        <td>{{ movie.rating }}</td>
+                        <td>
+                            <a href="#" class="edit-button" data-id="{{ movie.id }}" style="margin-right: 10px"><i
+                                    class="fas fa-edit"></i></a>
+                            <a href="#" class="delete-button" data-id="{{ movie.id }}" style="margin-right: 10px"><i
+                                    class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div style="margin-top:20px; text-align:center;">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"
+                    style="color: white; text-decoration: none; margin-right: 10px;">Anterior</a>
+                {% endif %}
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"
+                    style="color: white; text-decoration: none; margin-left: 10px;">Siguiente</a>
+                {% endif %}
+            </div>
+        </section>
+    </div>
 
-        .pagination span {
-            color: #ffcc00;
-            margin: 0 10px;
-        }
-				a {
-						text-decoration: none; /* Elimina el subrayado */
-						color: inherit;        /* Hace que el color sea el mismo que el de su elemento padre */
-						cursor: pointer;       /* Cambia el cursor a uno no interactivo */
-				}
+    <!-- Modal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>¿Estás seguro de que quieres eliminar esta película?</p>
+            <button id="delete-button-modal">eliminar</button>
+            <button class="close">cancelar</button>
+        </div>
+    </div>
 
-</style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const deleteModal = document.getElementById("delete-modal");
+            const closeModalButtons = deleteModal.querySelectorAll(".close");
+            const deleteButtonModal = document.getElementById("delete-button-modal");
+            let movieIdToDelete = null;
+    
+            // Manejar el clic en los botones de eliminación
+            document.querySelectorAll(".delete-button").forEach(function (button) {
+                button.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    movieIdToDelete = this.getAttribute("data-id");
+                    console.log(`ID a eliminar: ${movieIdToDelete}`);
+                    deleteModal.style.display = "block";
+                });
+            });
+    
+            // Manejar el clic en el botón de confirmación dentro del modal
+            deleteButtonModal.addEventListener("click", function () {
+                if (movieIdToDelete) {
+                    console.log(`Se ha aceptado eliminar el ID: ${movieIdToDelete}`);
+                    deleteModal.style.display = "none";
+                }
+            });
+    
+            // Manejar el clic en los botones para cerrar el modal
+            closeModalButtons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    deleteModal.style.display = "none";
+                });
+            });
+    
+            // Cerrar el modal si se hace clic fuera de su contenido
+            window.addEventListener("click", function (event) {
+                if (event.target === deleteModal) {
+                    deleteModal.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
 
-<div id='main'>
-	<p><a href="{% url 'homeMovies' %}"><strong>Home</strong></a> / Configuración</p>
-	<section id='table'>
-		<h4>Registros de películas</h4>
-		<table>
-			<thead>
-				<th>titulo</th>
-				<th>descripción</th>
-				<th>rating</th>
-			</thead>
-			<tbody>
-				{% for movie in page_obj %}
-				<tr>
-					<td>{{ movie.title }}</td>
-					<td>{{ movie.description }}</td>
-					<td>{{ movie.rating }}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		
-		<div style="margin-top:20px; text-align:center;">
-			{% if page_obj.has_previous %}
-				<a href="?page={{ page_obj.previous_page_number }}" style="color: white; text-decoration: none; margin-right: 10px;">Anterior</a>
-			{% endif %}
-			Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" style="color: white; text-decoration: none; margin-left: 10px;">Siguiente</a>
-        {% endif %}
-		</div>
-	</section>
-</div>
+</html>
