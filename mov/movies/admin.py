@@ -15,6 +15,6 @@ class MoviesAdmin(admin.ModelAdmin):
             'fields': ('img', 'rating', 'year', 'video'),
         }),
     )
-    readonly_fields = ('year',)
+    #readonly_fields = ('year',)
 
 admin.site.register(Movies, MoviesAdmin)

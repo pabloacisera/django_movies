@@ -1,0 +1,113 @@
+<div
+  class="cards-container"
+  style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  "
+>
+  {% for movie in movies %}
+  <section
+    class="card"
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 300px;
+      flex: 1 1 calc(33.333% - 20px);
+      margin: 10px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background: #f9f9f9;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    "
+  >
+    <div class="card-title" style="margin-bottom: 10px">
+      <h4 style="margin: 0; color: #333; font-size: 1.5em">
+        {{ movie.title }}
+      </h4>
+    </div>
+    <div class="body-card" style="width: 100%">
+      <img
+        src="{{ movie.img }}"
+        alt="{{ movie.title }}"
+        style="
+          width: 100%;
+          height: auto;
+          border-radius: 5px;
+          margin-bottom: 10px;
+        "
+      />
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      >
+        <span style="font-size: 0.9em; color: #555">⭐ {{ movie.rating }}</span>
+        <span style="font-size: 0.9em; color: #555">📁 {{ movie.category }}</span>
+      </div>
+      <section
+        class="description"
+        style="margin-bottom: 15px; color: #666; font-size: 0.9em"
+      >
+        <p style="margin: 0">{{ movie.description }}</p>
+        <span
+          style="
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #333;
+          "
+          >⏱ {{ movie.duration }} min</span
+        >
+      </section>
+      <div class="play" style="margin-top: 10px">
+        <a
+          href="{{ movie.video }}"
+          target="_blank"
+          style="text-decoration: none"
+        >
+          <button
+            style="
+              padding: 10px 15px;
+              font-size: 1em;
+              color: #fff;
+              background: #007bff;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: background 0.3s;
+            "
+          >
+            VER ONLINE
+          </button>
+        </a>
+      </div>
+    </div>
+  </section>
+  {% empty %}
+  <span
+    style="
+      display: block;
+      margin: 20px auto;
+      color: #d9534f;
+      font-size: 1.2em;
+      text-align: center;
+    "
+  >
+    No existen registros en base de datos
+  </span>
+  {% endfor %}
+</div>
+
+<script>
+  console.log("Se ha renderizado un listado");
+</script>
