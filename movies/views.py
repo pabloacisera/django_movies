@@ -19,10 +19,12 @@ def configMovies(request):
     
     films_list = Movies.objects.all()
     
-    paginator = Paginator(films_list, 2) #cantidad de registros por pagina
+    paginator = Paginator(films_list, 10) #cantidad de registros por pagina
     
     page_number = request.GET.get('page')
     
     page_obj = paginator.get_page(page_number)
     
     return render(request, 'configMovies.html', {'page_obj': page_obj})
+    
+    
