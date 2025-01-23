@@ -92,8 +92,61 @@
             width: 50%;
             text-align: center;
         }
+        
+        .new_film {
+          display: flex;
+          align-items: center; /* Alinear ícono y botón verticalmente */
+          gap: 8px; /* Espaciado entre el SVG y el botón */
+          background-color: #f1f3f4; /* Fondo suave para el contenedor */
+          border: 1px solid #d1d5db; /* Borde sutil */
+          border-radius: 8px; /* Bordes redondeados */
+          padding: 10px 16px; /* Espaciado interno */
+          max-width: 130px; /* Ancho máximo para evitar expansiones grandes */
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-       
+        .new_film:hover {
+          background-color: #e2e8f0; /* Cambia el fondo al pasar el cursor */
+          box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Más sombra al hover */
+        }
+
+        .new_film svg {
+          flex-shrink: 0; /* Evitar que el SVG se redimensione al reducir el contenedor */
+          width: 24px;
+          height: 24px;
+          fill: #5f6368; /* Color del ícono */
+        }
+
+        .new_film svg:hover {
+          fill: #1a73e8; /* Cambiar color del ícono al hover */
+        }
+
+        .new {
+          background-color: #1a73e8; /* Fondo azul para el botón */
+          color: #ffffff; /* Texto blanco */
+          border: none; /* Sin borde */
+          border-radius: 4px; /* Bordes ligeramente redondeados */
+          padding: 6px 12px; /* Espaciado interno del botón */
+          font-size: 14px; /* Tamaño de texto */
+          cursor: pointer; /* Manito al pasar por encima */
+          transition: background-color 0.3s ease;
+        }
+
+        .new:hover {
+          background-color: #1558b0; /* Fondo más oscuro en hover */
+        }
+
+        .new:focus {
+          outline: 2px solid #1a73e8; /* Foco accesible */
+          outline-offset: 2px;
+        }
+        
+        a{
+            text-decoration:none;
+            color:white;
+            font:bold;
+        }
     </style>
 </head>
 
@@ -102,6 +155,11 @@
         <p><a href="{% url 'homeMovies' %}"><strong>Home</strong></a> / Configuración</p>
         <section id="table">
             <h4>Registros de películas</h4>
+            <br>
+            <div class="new_film">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M400-480ZM160-160q-33 0-56.5-23.5T80-240v-240h80v240h480v-480H400v-80h240q33 0 56.5 23.5T720-720v180l160-160v440L720-420v180q0 33-23.5 56.5T640-160H160Zm40-160h400L465-500 360-360l-65-87-95 127Zm-40-240v-80H80v-80h80v-80h80v80h80v80h-80v80h-80Z"/></svg>
+                <button class="new"><a  href="{% url 'createFilm' %}">nuevo</a></button>
+            </div>
             <table>
                 <thead>
                     <tr>

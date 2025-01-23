@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nueva Película</title>
+    <style>
+        /* Estilo base para el body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Fondo negro */
+            color: #fff; /* Texto blanco por defecto */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Apila los elementos verticalmente */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: auto; /* Permite que el contenido desborde */
+        }
+
+        /* Estilo para el contenedor principal */
+        .main {
+            width: 100%;
+            max-width: 500px;
+            background-color: #333; /* Fondo gris oscuro para el formulario */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            overflow-y: auto; /* Permite la barra de desplazamiento vertical */
+            max-height: 90vh; /* Limita la altura del contenedor */
+        }
+
+        /* Estilo para el título h2 */
+        .movie-form h2 {
+            text-align: center;
+            color: #ffeb3b; /* Amarillo para el título */
+            margin-bottom: 20px;
+            font-size: 24px; /* Tamaño de fuente adecuado */
+        }
+
+        /* Estilo para los labels */
+        .movie-form label {
+            display: block;
+            color: #ffeb3b; /* Amarillo para los labels */
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        /* Estilo para los inputs y textareas */
+        .movie-form input,
+        .movie-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #555; /* Gris oscuro para bordes */
+            background-color: #222; /* Fondo gris oscuro */
+            color: #fff; /* Texto blanco */
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+        }
+
+        /* Evitar el redimensionamiento del textarea */
+        .movie-form textarea {
+            resize: none;
+        }
+
+        /* Efecto de enfoque en los inputs */
+        .movie-form input:focus,
+        .movie-form textarea:focus {
+            border-color: #ffeb3b; /* Amarillo para el enfoque */
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
+        }
+
+        /* Estilo para el botón de submit */
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffeb3b; /* Amarillo para el botón */
+            color: #000; /* Texto negro */
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+        }
+
+        /* Estilo para el hover y active del botón */
+        .submit-btn:hover {
+            background-color: #ffd600; /* Amarillo más intenso al pasar el mouse */
+        }
+
+        .submit-btn:active {
+            background-color: #ffab00; /* Amarillo oscuro al hacer clic */
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form class="movie-form" method="POST">
+            {% csrf_token %}
+            <h2>Crear Nueva Película</h2> <!-- H2 visible -->
+            {{ form.as_p }}  <!-- Asegúrate de que el formulario se renderiza correctamente -->
+            <button type="submit" class="submit-btn">Crear Película</button>
+        </form>
+    </div>
+</body>
+</html>
+
